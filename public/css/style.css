@@ -1,0 +1,1163 @@
+/* ==========================================================================
+   1. PENGATURAN GLOBAL & VARIABEL
+   ========================================================================== */
+
+/*
+|--------------------------------------------------------------------------
+| Variabel CSS (Custom Properties)
+|--------------------------------------------------------------------------
+| Variabel ini didefinisikan pada `:root` selector agar dapat diakses secara
+| global di seluruh dokumen. Penggunaan variabel membantu dalam maintenance
+| dengan memungkinkan perubahan nilai (seperti warna atau ukuran) di satu
+| tempat, yang kemudian akan diterapkan secara otomatis di seluruh website.
+*/
+:root {
+    /* Perilaku Scroll: Mengatur perilaku scroll halaman agar lebih halus (smooth) */
+    scroll-behavior: smooth;
+
+    /*
+    |--------------------------------------------------------------------------
+    | Palet Warna
+    |--------------------------------------------------------------------------
+    | Definisi semua warna yang digunakan di website.
+    */
+    --c-bg-dark: #272262;          /* Warna latar belakang gelap */
+    --c-primary: #9747FF;          /* Warna utama (primer) */
+    --c-primary-darker: #7a2be8;   /* Warna utama yang lebih gelap */
+    --c-secondary-hover: #FFD700;  /* Warna sekunder untuk efek hover */
+    --c-cta: #ff5733;              /* Warna untuk Call-to-Action (CTA) */
+    --c-cta-hover: #c4421a;        /* Warna CTA saat di-hover */
+    --c-text-light: #ffffff;       /* Warna teks terang */
+    --c-text-muted: #6c757d;       /* Warna teks muted (abu-abu) */
+    --c-border: #ccc;              /* Warna border umum */
+    --c-bg-subsection: #f8f9fa;   /* Warna latar belakang untuk sub-section */
+    --c-link-active: #0d6efd;      /* Warna link yang aktif */
+
+    /*
+    |--------------------------------------------------------------------------
+    | Tipografi
+    |--------------------------------------------------------------------------
+    | Definisi font-family utama yang digunakan di website.
+    */
+
+    /* Font utama yang digunakan di seluruh website */
+    font-family: 'Poppins' Arial, sans-serif;
+
+    /* Font utama untuk teks utama, seperti judul dan paragraf */
+    --font-primary: 'Poppins', Arial, sans-serif;
+
+    /* Font alternatif jika Poppins tidak tersedia */
+    --font-secondary: 'Poppins', Arial, sans-serif; /* Font alternatif untuk teks sekunder */
+    
+    /*
+    |--------------------------------------------------------------------------
+    | Ukuran & Jarak (Spacing)
+    |--------------------------------------------------------------------------
+    | Definisi ukuran elemen atau jarak antar elemen.
+    */
+    --navbar-height: 80px;         /* Tinggi bilah navigasi (navbar) */
+    --sidebar-top-spacing: 20px;   /* Jarak dari atas untuk sidebar */
+}
+
+/* ==========================================================================
+   2. RESET & GAYA DASAR (BASE)
+   ========================================================================== */
+
+/*
+|--------------------------------------------------------------------------
+| Box-sizing Reset Universal
+|--------------------------------------------------------------------------
+| Mengatur `box-sizing` ke `border-box` untuk semua elemen. Ini memastikan
+| bahwa padding dan border disertakan dalam total lebar dan tinggi elemen,
+| sehingga mempermudah layout dan mencegah masalah overflow.
+*/
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Gaya Dasar untuk Seluruh Halaman
+|--------------------------------------------------------------------------
+| Mengatur `margin` dan `padding` ke 0 untuk elemen `html` dan `body`
+| untuk menghilangkan spasi default browser. Mengatur properti dasar
+| seperti warna latar belakang, warna teks, dan font untuk elemen `body`.
+| `position: relative` diperlukan untuk beberapa komponen Bootstrap dan Scrollspy.
+*/
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--c-bg-dark);
+    color: var(--c-text-light);
+    font-family: var(--font-primary);
+    position: relative; /* Diperlukan untuk beberapa komponen Bootstrap & Scrollspy */
+}
+
+
+/* ==========================================================================
+   3. KOMPONEN UTAMA (REUSABLE)
+   ========================================================================== */
+
+/*
+|--------------------------------------------------------------------------
+| Tombol (Buttons)
+|--------------------------------------------------------------------------
+| Styling untuk tombol `btn-primary` dan `btn-outline-primary`, termasuk
+| gaya default dan efek hover/focus/active. Kelas ini mengadaptasi gaya
+| tombol Bootstrap dengan variabel warna kustom.
+*/
+
+.btn-secondary {
+    color: var(--c-primary);
+    background-color: white;
+    border-color: white;
+}
+.btn-secondary:hover, .btn-secondary:focus, .btn-secondary:active {
+    color: var(--c-primary);
+    background-color: #ccc;
+    border-color: #ccc;
+}
+
+/* Gaya untuk tombol utama (solid) */
+.btn-primary {
+    color: var(--c-text-light);
+    background-color: var(--c-primary);
+    border-color: var(--c-primary);
+}
+
+/* Efek hover, focus, dan active untuk tombol utama */
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+    color: var(--c-text-light);
+    background-color: var(--c-primary-darker);
+    border-color: var(--c-primary-darker);
+}
+
+/* Gaya untuk tombol outline (garis tepi) */
+.btn-outline-primary {
+    color: var(--c-primary);
+    border-color: var(--c-primary);
+}
+
+/* Efek hover, focus, dan active untuk tombol outline */
+.btn-outline-primary:hover, .btn-outline-primary:focus, .btn-outline-primary:active {
+    color: var(--c-text-light);
+    background-color: var(--c-primary);
+    border-color: var(--c-primary);
+}
+
+
+/* ==========================================================================
+   4. GAYA PER BAGIAN HALAMAN (SECTIONS)
+   ========================================================================== */
+
+/*
+|--------------------------------------------------------------------------
+| Navbar (Bilah Navigasi)
+|--------------------------------------------------------------------------
+| Styling untuk elemen-elemen di dalam bilah navigasi seperti link, brand,
+| dan toggler, serta efek hover dan active pada link navigasi.
+*/
+.navbar .nav-link {
+    padding: 20px 20px;
+    font-size: 18px;
+    text-align: left;
+}
+
+.navbar-nav {
+    justify-content: center;
+    width: 100%;
+}
+
+.navbar .navbar-brand {
+    font-size: 1.25rem; /* Menggunakan rem untuk skalabilitas yang lebih baik */
+}
+
+.navbar .navbar-toggler {
+    padding: 10px;
+    font-size: 22px;
+}
+
+/* Efek hover pada link navigasi */
+.navbar-nav .nav-link:hover {
+    color: var(--c-secondary-hover) !important; /* `!important` digunakan untuk menimpa spesifisitas Bootstrap */
+}
+
+/* Gaya untuk link navigasi yang sedang aktif */
+.navbar-nav .nav-link.active {
+    text-decoration: underline !important; /* Tambahkan garis bawah */
+    color: var(--c-text-light) !important;
+}
+
+/* ==========================================================================
+   5. PERBAIKAN RESPONSIVE UNTUK NAVBAR MOBILE (VERSI LENGKAP)
+   ========================================================================== */
+
+/* Target semua layar dengan lebar maksimal 991.98px (breakpoint 'lg' Bootstrap) */
+@media (max-width: 991.98px) {
+
+    /* Memberi latar belakang dan padding pada kontainer menu yang diperluas */
+    .navbar-collapse {
+        margin-top: 15px;
+        padding: 20px;
+        background-color: #4A276B;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    /* Menyesuaikan padding untuk setiap link di menu mobile */
+    .navbar .nav-link {
+        padding: 12px 0;
+    }
+
+    /* Memastikan menu link dan tombol login terpisah dengan baik */
+    .navbar-nav {
+        width: auto;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Mengatasi masalah dropdown yang terpotong dan membuatnya menyatu dengan menu */
+    .navbar .dropdown-menu {
+        position: static !important;
+        width: 100%;
+        background-color: transparent;
+        border: none;
+        box-shadow: none;
+        padding-top: 0; /* Direset dari sebelumnya */
+        margin-top: 10px; /* <<< PENAMBAHAN KUNCI: Memberi jarak dari tombol "Masuk" */
+    }
+
+    /* Menyamakan gaya item dropdown dengan link navigasi lainnya */
+    .navbar .dropdown-item {
+        padding: 10px 15px; /* <<< PERUBAHAN: Memberi padding horizontal agar teks tidak menempel */
+        color: var(--c-text-light);
+        opacity: 0.8;
+        border-radius: 5px; /* <<< PENAMBAHAN: Membuat item bisa di-hover dengan latar belakang */
+    }
+
+    .navbar .dropdown-item:hover {
+        color: var(--c-text-light);
+        opacity: 1;
+        background-color: rgba(255, 255, 255, 0.1); /* <<< PENAMBAHAN: Efek hover yang lebih jelas */
+    }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Hero Section
+|--------------------------------------------------------------------------
+| Styling untuk bagian 'hero' atau bagian atas halaman yang biasanya
+| berisi judul besar, deskripsi singkat, dan Call-to-Action.
+*/
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Mengisi seluruh tinggi viewport */
+    background: url('/img/background.jpg') center/cover no-repeat; /* Gambar latar belakang */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: left;
+    padding-left: 30px;
+    color: var(--c-text-light);
+}
+
+.hero h1 {
+    font-weight: bold;
+    font-size: 40px;
+    margin-bottom: 5px;
+}
+
+.hero p {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+/* Gaya untuk tombol Call-to-Action di Hero Section */
+#cta-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 18px;
+    color: var(--c-text-light);
+    background: var(--c-cta);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Transisi halus untuk efek hover */
+}
+
+#cta-btn:hover {
+    background: var(--c-cta-hover);
+}
+
+
+/* |--------------------------------------------------------------------------
+| STYLING RESPONSIVE UNTUK MOBILE (TAMBAHKAN KODE INI)
+|--------------------------------------------------------------------------
+*/
+@media (max-width: 768px) {
+    .hero {
+        /* * Mengganti padding-left yang besar dengan padding di kiri dan kanan
+         * agar konten tidak menempel di tepi layar. Nilai 30px ini akan 
+         * membuat konten sejajar dengan logo di header mobile.
+         */
+        padding: 0 30px; 
+        
+        /* * Memusatkan konten secara horizontal di layar mobile.
+         * Ini seringkali terlihat lebih baik di layar sempit.
+         */
+        justify-content: center;
+        text-align: center;
+    }
+
+    .hero h1 {
+        /* Mengurangi ukuran font agar pas di layar mobile */
+        font-size: 32px; 
+    }
+
+    .hero p {
+        /* Mengurangi ukuran font agar mudah dibaca */
+        font-size: 18px;
+    }
+}
+
+/* ==========================================================================
+   5. PERBAIKAN RESPONSIVE UNTUK NAVBAR MOBILE (VERSI LENGKAP)
+   ========================================================================== */
+
+/* Target semua layar dengan lebar maksimal 991.98px (breakpoint 'lg' Bootstrap) */
+@media (max-width: 991.98px) {
+
+    /* Memberi latar belakang dan padding pada kontainer menu yang diperluas */
+    .navbar-collapse {
+        margin-top: 15px;
+        padding: 20px;
+        background-color: #4A276B;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    /* Menyesuaikan padding untuk setiap link di menu mobile */
+    .navbar .nav-link {
+        padding: 12px 0;
+    }
+
+    /* Memastikan menu link dan tombol login terpisah dengan baik */
+    .navbar-nav {
+        width: auto;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Mengatasi masalah dropdown yang terpotong dan membuatnya menyatu dengan menu */
+    .navbar .dropdown-menu {
+        position: static !important;
+        width: 100%;
+        background-color: transparent;
+        border: none;
+        box-shadow: none;
+        padding-top: 0; /* Direset dari sebelumnya */
+        margin-top: 10px; /* <<< PENAMBAHAN KUNCI: Memberi jarak dari tombol "Masuk" */
+    }
+
+    /* Menyamakan gaya item dropdown dengan link navigasi lainnya */
+    .navbar .dropdown-item {
+        padding: 10px 15px; /* <<< PERUBAHAN: Memberi padding horizontal agar teks tidak menempel */
+        color: var(--c-text-light);
+        opacity: 0.8;
+        border-radius: 5px; /* <<< PENAMBAHAN: Membuat item bisa di-hover dengan latar belakang */
+    }
+
+    .navbar .dropdown-item:hover {
+        color: var(--c-text-light);
+        opacity: 1;
+        background-color: rgba(255, 255, 255, 0.1); /* <<< PENAMBAHAN: Efek hover yang lebih jelas */
+    }
+
+    }
+
+    /* styling untuk item dropdown yang aktif */
+    .dropdown-item.active,
+    .dropdown-item:focus,
+    .dropdown-item:active {
+    background-color: var(--c-primary)
+
+}
+
+/*
+|--------------------------------------------------------------------------
+| Layout Konten dengan Sidebar
+|--------------------------------------------------------------------------
+| Styling untuk tata letak halaman yang melibatkan sidebar. Ini termasuk
+| perbaikan untuk posisi sticky sidebar dan penyesuaian jarak scroll.
+*/
+
+/* Memastikan properti `overflow: visible` untuk elemen utama agar `position: sticky` berfungsi dengan baik */
+main,
+.row {
+    overflow: visible;
+}
+
+/* Gaya untuk sidebar */
+#sidebar {
+    position: sticky; /* Membuat sidebar tetap terlihat saat discroll */
+    top: calc(var(--navbar-height) + var(--sidebar-top-spacing)); /* Posisi sticky dari atas */
+    height: calc(200vh - (var(--navbar-height) + var(--sidebar-top-spacing))); /* Tinggi sidebar */
+    overflow-y: auto; /* Mengaktifkan scroll vertikal jika konten sidebar melebihi tinggi */
+    z-index: 1020; /* Z-index agar sidebar berada di atas elemen lain */
+}
+
+/* Gaya untuk link navigasi di sidebar */
+#vertical-nav .nav-link {
+    color: var(--c-text-muted);
+}
+
+/* Gaya untuk link navigasi sidebar yang aktif */
+#vertical-nav .nav-link.active {
+    background-color: var(--c-link-active);
+    color: var(--c-text-light);
+}
+
+/* Gaya untuk setiap bagian konten utama */
+.content-section {
+    /* Menambahkan jarak dari atas saat di-scroll ke section ini (untuk scroll-margin-top) */
+    scroll-margin-top: calc(var(--navbar-height) + 20px);
+    min-height: 500px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* Gaya untuk sub-bagian dalam konten */
+.sub-section {
+    min-height: 400px;
+    background-color: var(--c-bg-subsection);
+    /* `color: #212529;` dapat diaktifkan jika background terang dan teks gelap diperlukan */
+}
+
+/*
+|--------------------------------------------------------------------------
+| Komponen Lainnya
+|--------------------------------------------------------------------------
+| Styling untuk komponen umum lain yang mungkin muncul di berbagai bagian.
+*/
+.icon-box p {
+    color: var(--c-text-light);
+    font-size: 16px;
+    opacity: 0.7;
+}
+
+/*
+|--------------------------------------------------------------------------
+| FAQ & Tips Section Styling
+|--------------------------------------------------------------------------
+| Styling khusus untuk bagian Frequently Asked Questions (FAQ) dan Tips & Trik, termasuk
+| variabel warna tambahan, judul, navigasi tab, dan accordion.
+*/
+
+/*
+|--------------------------------------------------------------------------
+| Variabel Warna Tambahan (Opsional)
+|--------------------------------------------------------------------------
+| Variabel khusus untuk section FAQ, memungkinkan kustomisasi independen.
+*/
+:root {
+    --primary-color: #4A276B;    /* Warna ungu utama untuk FAQ */
+    --light-gray: #f8f9fa;       /* Abu-abu terang */
+    --medium-gray: #e9ecef;      /* Abu-abu menengah */
+    --dark-gray: white;          /* Abu-abu gelap (digunakan sebagai putih di sini) */
+    --text-color: #ffffff;       /* Warna teks umum untuk FAQ */
+    --border-color: #dee2e6;     /* Warna border untuk elemen FAQ */
+}
+
+/* Styling untuk Judul dan Subjudul Section FAQ */
+.pxp-section-h2 {
+    font-weight: 700;
+    color: var(--dark-gray);
+    margin-bottom: 10px;
+}
+
+.pxp-text-light {
+    color: var(--text-color);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Styling untuk Navigasi Tabs (Talenta & Perusahaan) */
+.nav-tabs {
+    border-bottom: none;          /* Hilangkan garis bawah default Bootstrap */
+    justify-content: center;      /* Posisikan tab di tengah */
+    gap: 10px;                    /* Beri jarak antar tombol tab */
+}
+
+.nav-tabs .nav-link {
+    background-color: #777777;
+    color: var(--text-color);
+    border-radius: .25rem;          /*Buat tombol menjadi berbentuk pil */
+    border: 1px solid transparent; /* Hilangkan border default */
+    font-weight: 600;
+    transition: all 0.3s ease;   /* Transisi halus untuk semua properti */
+}
+
+/* Style untuk tombol tab saat tidak aktif tapi di-hover */
+.nav-tabs .nav-link:not(.active):hover {
+    background-color: #9747FF;
+    border-color: #ac53ff;
+    border-color: var(--primary-color);
+}
+
+/* Style untuk tombol tab yang sedang aktif */
+.nav-tabs .nav-link.active {
+    background-color: var(--c-primary);
+    color: white;
+}
+
+/* Styling untuk Accordion (FAQ List) */
+.pxp-faqs-accordion .accordion-item {
+    border: none;                                  /* Hilangkan border default antar item */
+    border-bottom: 1px solid var(--border-color); /* Beri garis bawah tipis sebagai pemisah */
+    margin-bottom: 15px;                         /* Beri jarak antar item FAQ */
+    background-color: transparent;
+}
+
+/* Hapus border pada item terakhir agar lebih rapi */
+.pxp-faqs-accordion .accordion-item:last-child {
+    border-bottom: none;
+}
+
+.pxp-faqs-accordion .accordion-header {
+    margin: 0;
+}
+
+.pxp-faqs-accordion .accordion-button {
+    font-size: 1.1rem;                 /* Sedikit perbesar ukuran font pertanyaan */
+    font-weight: 600;
+    color: var(--dark-gray);
+    background-color: transparent;
+    padding: 20px 0;                   /* Atur padding vertikal */
+    text-align: left;
+}
+
+/* Hapus bayangan saat tombol accordion diklik */
+.pxp-faqs-accordion .accordion-button:focus {
+    box-shadow: none;
+    border-color: transparent;
+}
+
+/* Saat accordion tertutup */
+.pxp-faqs-accordion .accordion-button:not(.collapsed) {
+    /* color: #ac53ff;      Ubah warna teks pertanyaan saat terbuka */
+    background-color: transparent;
+    box-shadow: none;
+}
+
+/* Styling untuk isi jawaban (accordion body) */
+.pxp-faqs-accordion .accordion-body {
+    color: var(--c-text-light);
+    line-height: 1.7;
+    padding: 0 0 20px 0;
+}
+
+/* Kustomisasi Ikon Plus (+) dan Minus (-) pada Accordion */
+.pxp-faqs-accordion .accordion-button::after {
+    /* Mengganti ikon panah default dengan gambar ikon plus */
+    /* content: '+';                       Menggunakan karakter plus */
+    font-family: monospace;             /* Font yang solid untuk + dan - */
+    font-size: 2rem;
+    font-weight: 300;
+    /* color: var(--primary-color); */  
+    background-image: none;             /* Hilangkan gambar panah SVG default Bootstrap */
+    transform: none;                    /* Hapus rotasi default Bootstrap */
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all 0.3s ease;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pxp-faqs-accordion .accordion-button:not(.collapsed)::after {
+    /* Mengganti ikon menjadi minus saat accordion terbuka */
+    /* content: '−';  Karakter minus */
+    transform: translateY(-50%); /* Memastikan posisi tetap di tengah vertikal */
+}
+
+/* Agar teks pertanyaan tidak bertabrakan dengan ikon +/-, beri padding kanan pada tombol */
+.pxp-faqs-accordion .accordion-button {
+    padding-right: 40px; 
+}
+
+/*
+|--------------------------------------------------------------------------
+| Kustomisasi Tampilan Card Bootstrap
+|--------------------------------------------------------------------------
+| Styling untuk elemen card Bootstrap, termasuk gaya dasar, efek hover,
+| dan penyesuaian untuk gambar serta konten di dalamnya.
+*/
+
+/* Mengubah gaya dasar dari setiap card */
+.card {
+    border: none;                             /* Hilangkan border default Bootstrap */
+    border-radius: 15px;                      /* Buat sudut lebih melengkung */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Efek bayangan yang lembut */
+    transition: all 0.3s ease-in-out;         /* Animasi halus untuk semua properti */
+    height: 100%;                             /* Pastikan semua card memiliki tinggi yang sama dalam satu baris */
+}
+
+/* Efek saat kursor mouse berada di atas card */
+.card:hover {
+    transform: translateY(-10px);            /* Card akan sedikit terangkat */
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15); /* Bayangan menjadi lebih jelas */
+}
+
+/* Memastikan gambar di dalam card mengikuti sudut melengkung dan memiliki ukuran seragam */
+.card-img-top {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    height: 200px;                           /* Atur tinggi gambar agar seragam */
+    object-fit: cover;                       /* Gambar akan mengisi area tanpa distorsi */
+}
+
+/* Mengatur padding dan layout di dalam card-body */
+.card-body {
+    padding: 1.5rem;                         /* Tambah ruang padding di dalam body */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Mengubah gaya judul card */
+.card-title {
+    font-weight: 700;                        /* Buat teks lebih tebal */
+    color: #333;                             /* Warna teks lebih gelap */
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+}
+
+/* Mengubah gaya teks deskripsi */
+.card-text {
+    color: #666;                             /* Warna teks abu-abu untuk deskripsi */
+    line-height: 1.6;                        /* Atur jarak antar baris agar mudah dibaca */
+    flex-grow: 1;                            /* Mendorong elemen di bawahnya (seperti tombol) ke bagian bawah */
+    margin-bottom: 1.25rem;
+}
+
+/*
+|--------------------------------------------------------------------------
+| OPSIONAL: Styling untuk Tombol di Dalam Card
+|--------------------------------------------------------------------------
+| Jika ada tombol di dalam card, CSS ini akan memberikan gaya khusus.
+*/
+
+
+/*
+|--------------------------------------------------------------------------
+| Styling untuk Gambar Ikon yang Terpusat
+|--------------------------------------------------------------------------
+| Kelas ini akan membuat gambar ikon memiliki lebar dan tinggi 5x5 cm
+| serta memposisikannya di tengah secara horizontal dalam kontainernya.
+*/
+.centered-icon {
+    display: block;  /* Mengubah gambar menjadi elemen blok agar `margin: auto` berfungsi */
+    margin: 0 auto;  /* Mengatur margin horizontal otomatis untuk pemusatan */
+    width: 5cm;      /* Mengatur lebar gambar menjadi 5 sentimeter */
+    height: 5cm;     /* Mengatur tinggi gambar menjadi 5 sentimeter */
+    object-fit: contain; /* Memastikan seluruh gambar terlihat di dalam dimensi yang ditentukan tanpa terpotong */
+    /* Atau gunakan 'cover' jika Anda ingin gambar mengisi seluruh area dan memungkinkan pemotongan */
+    /* object-fit: cover; */
+}
+
+.line {
+  /* Membuat garis tipis di bagian atas section.
+     Warna semi-transparan (alpha 0.15) cocok untuk background gelap. */
+  border-top: 5px solid rgba(255, 255, 255, 0.15);
+
+  /* Memberi jarak antara garis dan konten di dalamnya agar tidak menempel */
+  padding-top: 5rem; /* Anda bisa sesuaikan nilainya (misal: 80px) */
+}
+
+/* Pastikan styling card ini juga ada */
+.card.bg-dark .card-title {
+  color: var(--color-text-light); /* Atau cukup #fff */
+}
+
+.card.bg-dark .card-text {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/*
+|--------------------------------------------------------------------------
+| OPSIONAL: Styling untuk Tombol di Dalam Card
+|--------------------------------------------------------------------------
+*/
+.card-body .btn {
+    color: var(--c-text-light);
+    background-color: var(--c-primary);
+    border-color: var(--c-primary);
+    font-weight: 600;
+    /* border-radius: 50px; */
+    align-self: flex-start;
+    transition: background-color 0.2s ease;
+}
+
+.card-body .btn:hover {
+    background-color: var(--c-primary-darker);
+    border-color: var(--c-primary-darker);
+    color: var(--c-text-light); /* <-- Sebaiknya tambahkan juga di hover state agar konsisten */
+}
+
+/* ==========================================================================
+   6. FOOTER SECTION
+   ========================================================================== */
+
+/* Mengatur gaya untuk judul kolom di footer */
+
+#footer h5 {
+    font-weight: 700; /* 700 adalah nilai numerik untuk 'bold' */
+    color: var(--c-text-light); /* Memastikan judul juga berwarna putih terang */
+    margin-bottom: 1rem; /* Memberi sedikit jarak ke bawah */
+}
+
+/* Mengatur gaya untuk semua teks paragraf di footer */
+#footer p {
+    color: var(--c-text-light);
+    opacity: 0.8; /* Memberi sedikit transparansi agar tidak terlalu mencolok dibanding judul */
+    margin-bottom: 0.75rem;
+}
+
+/* Penyesuaian tambahan untuk konsistensi link di footer */
+#footer a {
+    color: var(--c-text-light);
+    opacity: 0.8;
+    transition: opacity 0.3s ease; /* Transisi halus untuk efek hover */
+}
+
+/* Efek hover pada link di footer */
+#footer a:hover {
+    opacity: 1; /* Membuat link lebih jelas saat disentuh kursor */
+    text-decoration: underline;
+}
+
+/* Mengembalikan opasitas untuk logo dan tombol agar tetap menonjol */
+#footer .logo,
+#footer .social-links a,
+#footer form button {
+    opacity: 1;
+}
+
+#footer .social-links a:hover {
+    transform: translateY(-2px); /* Efek sedikit terangkat saat hover */
+    text-decoration: none; /* Hilangkan underline khusus untuk ikon sosial media */
+}
+
+/* ==========================================================================
+    8. JOB LISTINGS PAGE (LOWONGAN)
+    ========================================================================== */
+
+
+/* --- Panel Filter --- */
+.job-filters-panel {
+     background-color: #2f2a6e;
+     border-radius: 12px;
+     border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.job-filters-panel .form-control,
+.job-filters-panel .form-select {
+     background-color: #3b357e;
+     border-color: rgba(255, 255, 255, 0.2);
+     color: var(--c-text-light);
+}
+
+.job-filters-panel .form-control::placeholder {
+     color: rgba(255, 255, 255, 0.5);
+}
+
+.job-filters-panel .form-control:focus,
+.job-filters-panel .form-select:focus {
+     box-shadow: 0 0 0 0.25rem rgba(151, 71, 255, 0.5);
+     background-color: #3b357e;
+     border-color: var(--c-primary);
+     color: var(--c-text-light);
+}
+
+/* --- Kartu Lowongan --- */
+.job-card-listing {
+     background-color: #2f2a6e;
+     border: 1px solid rgba(255, 255, 255, 0.1);
+     border-radius: 12px;
+     transition: all 0.3s ease;
+     display: flex;
+     flex-direction: column;
+     height: 100%;
+}
+
+.job-card-listing:hover {
+     transform: translateY(-5px);
+     border-color: var(--c-primary);
+     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.job-card-listing .card-header {
+     background-color: transparent;
+     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+     padding: 1.25rem;
+}
+
+.job-card-listing .card-body {
+     flex-grow: 1;
+     padding: 1.25rem;
+}
+
+.job-card-listing .card-footer {
+     background-color: transparent;
+     border-top: none;
+     padding: 0 1.25rem 1.25rem;
+}
+
+.company-logo-small {
+     width: 50px;
+     height: 50px;
+     background-color: white;
+     border-radius: 8px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     padding: 5px;
+     flex-shrink: 0;
+}
+
+.company-logo-small img {
+     max-width: 100%;
+     max-height: 100%;
+     object-fit: contain;
+}
+
+.job-card-listing .card-title {
+     color: var(--c-text-light);
+     font-weight: 600;
+     font-size: 1.1rem;
+}
+
+.company-name-listing {
+     color: rgba(255, 255, 255, 0.7);
+     font-size: 0.9rem;
+}
+
+.job-card-listing .btn-outline-light {
+     border-color: rgba(255, 255, 255, 0.5);
+     font-weight: 600;
+}
+
+.job-card-listing .btn-outline-light:hover {
+     background-color: var(--c-primary);
+     border-color: var(--c-primary);
+     color: var(--c-text-light);
+}
+
+/* ==========================================================================
+    9. JOB LISTINGS - HYBRID LAYOUT (DARK THEME + SIDEBAR)
+    ========================================================================== */
+
+.job-listing-body {
+     background-color: var(--c-bg-dark);
+}
+
+/* -- SIDEBAR FILTER -- */
+.filter-sidebar-dark {
+     background-color: #2f2a6e;
+     border-radius: 12px;
+     padding: 1.5rem;
+     position: sticky;
+     top: 100px;
+}
+
+.filter-sidebar-dark .filter-group {
+     margin-bottom: 1.25rem;
+}
+
+.filter-sidebar-dark .form-label {
+     margin-bottom: 0.5rem;
+     color: rgba(255, 255, 255, 0.9);
+}
+
+.filter-sidebar-dark .form-control,
+.filter-sidebar-dark .form-select {
+     background-color: #3b357e;
+     border: 1px solid rgba(255, 255, 255, 0.2);
+     color: var(--c-text-light);
+}
+
+.filter-sidebar-dark .form-control::placeholder {
+     color: rgba(255, 255, 255, 0.5);
+}
+
+.filter-sidebar-dark .form-control:focus,
+.filter-sidebar-dark .form-select:focus {
+     box-shadow: 0 0 0 0.25rem rgba(151, 71, 255, 0.5);
+     background-color: #3b357e;
+     border-color: var(--c-primary);
+     color: var(--c-text-light);
+}
+
+.filter-sidebar-dark .form-check-label {
+     color: rgba(255, 255, 255, 0.8);
+}
+
+.filter-sidebar-dark .form-check-input {
+     background-color: #3b357e;
+     border-color: rgba(255, 255, 255, 0.3);
+}
+
+.filter-sidebar-dark .form-check-input:checked {
+     background-color: var(--c-primary);
+     border-color: var(--c-primary);
+}
+
+.hr-dark {
+     border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* -- KONTEN KANAN (DAFTAR LOWONGAN) -- */
+.sort-by-dark {
+     display: flex;
+     align-items: center;
+     color: rgba(255, 255, 255, 0.8);
+}
+
+.sort-by-dark .form-select {
+     width: auto;
+     background-color: #3b357e;
+     border-color: rgba(255, 255, 255, 0.2);
+     color: var(--c-text-light);
+     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+}
+
+/* -- KARTU LOWONGAN (DARK) -- */
+.job-card-dark {
+     background-color: #2f2a6e;
+     border: 1px solid rgba(255, 255, 255, 0.1);
+     border-radius: 12px;
+     transition: all 0.3s ease;
+     display: flex;
+     flex-direction: column;
+     height: 100%;
+}
+
+.job-card-dark:hover {
+     transform: translateY(-5px);
+     border-color: var(--c-primary);
+     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.job-card-dark .card-header,
+.job-card-dark .card-body,
+.job-card-dark .card-footer {
+     background-color: transparent;
+     border: none;
+     padding: 1rem 1.25rem;
+}
+
+.job-card-dark .card-header {
+     display: flex;
+     align-items: flex-start;
+     gap: 1rem;
+     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.company-logo-dark {
+     width: 45px;
+     height: 45px;
+     object-fit: contain;
+     flex-shrink: 0;
+     background-color: white;
+     border-radius: 6px;
+     padding: 4px;
+}
+
+.job-title-dark {
+     font-weight: 600;
+     color: var(--c-text-light);
+     margin-bottom: 0.1rem;
+}
+
+.company-name-dark {
+     color: rgba(255, 255, 255, 0.7);
+     font-size: 0.9rem;
+}
+
+.job-meta-dark {
+     display: flex;
+     flex-direction: column;
+     gap: 0.5rem;
+     font-size: 0.9rem;
+     color: rgba(255, 255, 255, 0.7);
+}
+
+.job-meta-dark i {
+     color: var(--c-primary);
+     margin-right: 0.5rem;
+}
+
+.job-card-dark .card-footer {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     border-top: 1px solid rgba(255, 255, 255, 0.1);
+     margin-top: auto;
+}
+
+.status-badge-dark {
+     background-color: rgba(255, 255, 255, 0.1);
+     color: rgba(255, 255, 255, 0.8);
+     font-weight: 500;
+}
+
+.status-badge-dark i {
+     margin-right: 0.3rem;
+}
+
+.details-link {
+     color: var(--c-primary);
+     text-decoration: none;
+     font-weight: 600;
+     transition: all 0.2s ease;
+}
+
+.details-link:hover {
+     color: var(--c-text-light);
+     text-decoration: underline;
+}
+
+/* ==========================================================================
+    10. PROFILE & SETTINGS PAGE
+    ========================================================================== */
+
+/* Gaya untuk area unggah file drag-and-drop */
+.file-drop-area {
+    border: 2px dashed #dee2e6; /* Menggunakan warna border standar Bootstrap */
+    border-radius: .375rem; /* Menggunakan radius border standar Bootstrap */
+    padding: 2.5rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.file-drop-area:hover {
+    border-color: #0d6efd; /* Warna utama Bootstrap saat hover */
+}
+
+/* Mengatur ukuran ikon placeholder untuk foto profil */
+.photo-placeholder {
+    font-size: 3rem; /* Menyesuaikan ukuran ikon */
+    line-height: 1;
+}
+
+/* Penyesuaian kecil pada form-text di dalam form-check */
+.form-check .form-text {
+    margin-top: 0.1rem;
+    margin-left: 1.5em; /* Sejajarkan dengan teks label */
+}
+
+
+/* ==========================================================================
+   11. Logo Beranda
+   ========================================================================== */
+
+.logo-img {
+  /* Meniru 'w-full' dan 'max-h-12' (48px) */
+  width: 100%;
+  max-width: 158px; /* Lebar asli gambar untuk mencegah pembesaran berlebih */
+  max-height: 48px;
+
+  /* Meniru 'object-contain' */
+  object-fit: contain;
+
+  /* Mengubah logo menjadi putih menggunakan filter CSS.
+    - brightness(0) membuat gambar menjadi hitam.
+    - invert(1) membalik hitam menjadi putih.
+    - opacity(0.7) membuatnya sedikit transparan.
+  */
+  filter: brightness(0) invert(1) opacity(70%);
+  transition: all 0.3s ease-in-out;
+}
+
+.logo-img:hover {
+  /* Saat cursor di atas logo, opasitasnya menjadi penuh (100%) */
+  filter: brightness(0) invert(1) opacity(100%);
+  transform: scale(1.05); /* Sedikit memperbesar logo saat di-hover */
+}
+
+/* ==========================================================================
+   12. GAYA FLOATING WIDGET BANTUAN (VERSI GAMBAR)
+   ========================================================================== */
+
+.floating-help {
+    /* Posisi Mengambang */
+    position: fixed;
+    bottom: 15px; /* Jarak untuk mobile */
+    right: 15px;
+    z-index: 1000; /* Memastikan widget selalu di atas konten lain */
+}
+
+.floating-help img {
+    /* Ukuran Gambar Widget (Mobile-First) */
+    width: 50px;  /* Ukuran default untuk layar kecil/ponsel */
+    height: 50px;
+    
+    /* Efek visual */
+    border-radius: 50%; /* Membuat border gambar melingkar */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    
+    /* Transisi untuk efek hover yang halus */
+    transition: all 0.3s ease; /* Transisi untuk semua properti */
+}
+
+/* Efek saat kursor berada di atas widget */
+.floating-help a:hover img {
+    transform: scale(1.1); /* Sedikit memperbesar gambar */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* ======================================= */
+/* ATURAN RESPONSIVE (MEDIA QUERY)    */
+/* ======================================= */
+
+/* Untuk layar tablet dan yang lebih besar (lebar >= 768px) */
+@media (min-width: 768px) {
+    .floating-help {
+        bottom: 15px; /* Jarak sedikit lebih besar untuk layar tablet */
+        right: 15px;
+    }
+
+    .floating-help img {
+        width: 50px;  /* Ukuran normal untuk tablet dan desktop */
+        height: 50px;
+    }
+}
+
+/* Untuk layar desktop besar (lebar >= 1200px) */
+@media (min-width: 1200px) {
+    .floating-help {
+        bottom: 15px; /* Jarak lebih besar lagi untuk kenyamanan */
+        right: 15px;
+    }
+    
+    .floating-help img {
+        width: 65px;  /* Ukuran sedikit lebih besar untuk layar desktop lebar */
+        height: 65px;
+    }
+}
+
+/* ==========================================================================
+   13. ???
+   ========================================================================== */
+
