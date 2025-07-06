@@ -45,13 +45,18 @@
 
         <!-- Link menuju halaman Blog -->
         <li class="nav-item">
-          <a class="nav-link {{ ($title === 'Posts') ? 'active' : '' }}" href="/blog">Artikel</a>
+          <a class="nav-link {{ request()->is('berita*') ? 'active' : '' }}" href="/berita">Berita</a>
         </li>
 
         <!-- Link menuju halaman Tentang -->
         <li class="nav-item">
           <a class="nav-link {{ ($title === 'Tentang') ? 'active' : '' }}" href="/tentang">Tentang</a>
         </li>
+
+        <!-- Link menuju halaman Kategori Berita -->
+        {{-- <li class="nav-item">
+          <a class="nav-link {{ ($title === 'Kategori Berita') ? 'active' : '' }}" href="/berita/categories">Kategori Berita</a>
+        </li> --}}
 
       </ul>
 
@@ -63,7 +68,7 @@
           </button>
           <ul class="dropdown-menu dropdown-menu-end">
             <li><a class="dropdown-item" href="/login">Masuk</a></li>
-            <li><a class="dropdown-item" href="/register">Daftar</a></li>
+            <li><a class="dropdown-item" href="/register"></i>Daftar</a></li>
           </ul>
         </div>
       </div>

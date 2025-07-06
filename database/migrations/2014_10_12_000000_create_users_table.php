@@ -14,14 +14,19 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id(); // PK id_pengguna [cite: 108]
-            $table->string('nama'); // nama [cite: 109]
+            $table->string('name'); // nama [cite: 109]
+            $table->string('username')->unique(); // username [cite: 109]
+            $table->string('slug')->unique(); // slug [cite: 109]
             $table->integer('usia')->nullable(); // usia [cite: 110]
             $table->text('alamat')->nullable(); // alamat [cite: 111]
+            $table->string('no_telepon')->nullable(); // no_telepon [cite: 115]
             $table->string('email')->unique(); // email [cite: 112]
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password'); // password [cite: 113]
             // Role: 1=Admin, 2=Perusahaan, 3=Pencari Kerja
-            $table->tinyInteger('role_pengguna')->default(3); // role_pengguna 
+            $table->enum('role_pengguna', ['1', '2', '3'])->default('1'); // role_pengguna
+            $table->boolean('status_akun')->default(true); // status [cite: 116]
+            $table->string('foto')->nullable(); // foto [cite: 114]
             $table->rememberToken();
             $table->timestamps();
         });

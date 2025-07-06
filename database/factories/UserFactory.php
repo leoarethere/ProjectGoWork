@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -19,9 +19,17 @@ class UserFactory extends Factory
     {
         return [
             'name' => fake()->name(),
+            'username' => fake()->unique()->userName(),
+            'slug' => fake()->unique()->slug(),
+            'usia' => fake()->numberBetween(18, 65),
+            'alamat' => fake()->address(),
+            'no_telepon' => fake()->phoneNumber(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password' => '$2y$10$' . Str::random(60),
+            'role_pengguna' => fake()->randomElement(['1', '2', '3']), // 1 = Admin, 2 = Perusahaan, 3 = Pencari Kerja
+            'status_akun' => fake()->boolean(),
+            'foto' => fake()->imageUrl(400, 400, 'people', true, 'User'),
             'remember_token' => Str::random(10),
         ];
     }
